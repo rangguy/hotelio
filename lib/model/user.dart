@@ -5,10 +5,10 @@ class User {
   String? password;
 
   User({
-    required this.id,
-    required this.name,
-    required this.email,
-    required this.password,
+    this.id,
+    this.name,
+    this.email,
+    this.password,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => User(
