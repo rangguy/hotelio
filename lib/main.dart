@@ -4,6 +4,7 @@ import 'package:course_hotelio/config/session.dart';
 import 'package:course_hotelio/firebase_options.dart';
 import 'package:course_hotelio/page/home_page.dart';
 import 'package:course_hotelio/page/intro_page.dart';
+import 'package:course_hotelio/page/signin_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -47,7 +48,7 @@ class MyApp extends StatelessWidget {
         },
         AppRoute.intro: (context) => const IntroPage(),
         AppRoute.home: (context) => const HomePage(),
-        AppRoute.signin: (context) => const IntroPage(),
+        AppRoute.signin: (context) => const SignInPage(),
         AppRoute.detail: (context) => const IntroPage(),
         AppRoute.checkout: (context) => const IntroPage(),
         AppRoute.checkoutSuccess: (context) => const IntroPage(),
