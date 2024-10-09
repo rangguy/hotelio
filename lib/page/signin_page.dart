@@ -1,6 +1,9 @@
 import 'package:course_hotelio/config/app_asset.dart';
 import 'package:course_hotelio/config/app_color.dart';
+import 'package:course_hotelio/config/app_route.dart';
+import 'package:course_hotelio/source/user_source.dart';
 import 'package:course_hotelio/widget/button_custom.dart';
+import 'package:d_info/d_info.dart';
 import 'package:flutter/material.dart';
 
 class SignInPage extends StatelessWidget {
@@ -10,8 +13,21 @@ class SignInPage extends StatelessWidget {
   final formKey = GlobalKey<FormState>();
 
   login(BuildContext context) {
-    if (formKey.currentState!.validate()){
-      
+    if (formKey.currentState!.validate()) {
+      UserSource.signIn(controllerEmail.text, controllerPassword.text)
+          .then((response) {
+        if (response['success']) {
+          DInfo.dialogSuccess(context, response['message']);
+          DInfo.closeDialog(
+            context,
+            actionAfterClose: () {
+              Navigator.pushReplacementNamed(context, AppRoute.home);
+            },
+          );
+        } else {
+          DInfo.toastError(response['message']);
+        }
+      });
     }
   }
 
@@ -53,7 +69,8 @@ class SignInPage extends StatelessWidget {
                     ),
                     TextFormField(
                       controller: controllerEmail,
-                      validator: (value) => value == '' ? "Please input your email" : null,
+                      validator: (value) =>
+                          value == '' ? "Please input your email" : null,
                       decoration: InputDecoration(
                         isDense: true,
                         filled: true,
@@ -68,7 +85,8 @@ class SignInPage extends StatelessWidget {
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30),
-                          borderSide: const BorderSide(color: AppColor.secondary),
+                          borderSide:
+                              const BorderSide(color: AppColor.secondary),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30),
@@ -83,7 +101,8 @@ class SignInPage extends StatelessWidget {
                     TextFormField(
                       obscureText: true,
                       controller: controllerPassword,
-                      validator: (value) => value == '' ? "Please input your password" : null,
+                      validator: (value) =>
+                          value == '' ? "Please input your password" : null,
                       decoration: InputDecoration(
                         isDense: true,
                         filled: true,
@@ -98,7 +117,8 @@ class SignInPage extends StatelessWidget {
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30),
-                          borderSide: const BorderSide(color: AppColor.secondary),
+                          borderSide:
+                              const BorderSide(color: AppColor.secondary),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30),
@@ -113,7 +133,7 @@ class SignInPage extends StatelessWidget {
                     ButtonCustom(
                       label: 'Sign In',
                       isExpanded: true,
-                      onTap: () => {},
+                      onTap: () => login(context),
                     ),
                     const SizedBox(
                       height: 24,
