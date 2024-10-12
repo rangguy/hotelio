@@ -1,9 +1,12 @@
 import 'package:course_hotelio/config/app_asset.dart';
 import 'package:course_hotelio/config/app_color.dart';
+import 'package:course_hotelio/controller/c_nearby.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class NearbyPage extends StatelessWidget {
-  const NearbyPage({super.key});
+  NearbyPage({super.key});
+  final cNearby = Get.put(CNearby());
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +23,57 @@ class NearbyPage extends StatelessWidget {
         const SizedBox(
           height: 30,
         ),
+        categories(),
+        const SizedBox(
+          height: 30,
+        ),
       ],
     );
+  }
+
+  GetBuilder<CNearby> categories() {
+    return GetBuilder<CNearby>(builder: (_) {
+      return SizedBox(
+        height: 45,
+        child: ListView.builder(
+          itemCount: _.categories.length,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, index) {
+            String category = _.categories[index];
+            return Padding(
+              padding: EdgeInsets.fromLTRB(
+                index == 0 ? 16 : 8,
+                0,
+                index == cNearby.categories.length - 1 ? 16 : 8,
+                0,
+              ),
+              child: Material(
+                color: category == _.category ? AppColor.primary : Colors.white,
+                borderRadius: BorderRadius.circular(20),
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(20),
+                  onTap: () {
+                    cNearby.category = category;
+                  },
+                  child: Container(
+                    alignment: Alignment.center,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                    ),
+                    child: Text(
+                      category,
+                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ),
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
+      );
+    });
   }
 
   Container searchField() {
