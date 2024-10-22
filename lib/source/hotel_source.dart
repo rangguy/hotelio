@@ -3,7 +3,7 @@ import 'package:course_hotelio/model/hotel.dart';
 
 class HotelSource {
   static Future<List<Hotel>> getHotel() async {
-    var result = await FirebaseFirestore.instance.collection('hotel').get();
+    var result = await FirebaseFirestore.instance.collection('Hotel').get();
     return result.docs.map((e) => Hotel.fromJson(e.data())).toList();
   }
 }

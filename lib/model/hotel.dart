@@ -3,7 +3,7 @@ class Hotel {
   String name;
   String cover;
   List<String> images;
-  int prices;
+  int price;
   String location;
   double rate;
   String description;
@@ -15,7 +15,7 @@ class Hotel {
     required this.name,
     required this.cover,
     required this.images,
-    required this.prices,
+    required this.price,
     required this.location,
     required this.rate,
     required this.description,
@@ -28,7 +28,7 @@ class Hotel {
         name: json["name"],
         cover: json["cover"],
         images: List<String>.from(json["images"].map((x) => x)),
-        prices: json["prices"],
+        price: json["price"],
         location: json["location"],
         rate: json["rate"]?.toDouble(),
         description: json["description"],
@@ -41,7 +41,7 @@ class Hotel {
         "name": name,
         "cover": cover,
         "images": List<dynamic>.from(images.map((x) => x)),
-        "prices": prices,
+        "price": price,
         "location": location,
         "rate": rate,
         "description": description,
