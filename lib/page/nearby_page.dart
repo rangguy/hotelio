@@ -1,6 +1,7 @@
 import 'package:course_hotelio/config/app_asset.dart';
 import 'package:course_hotelio/config/app_color.dart';
 import 'package:course_hotelio/config/app_format.dart';
+import 'package:course_hotelio/config/app_route.dart';
 import 'package:course_hotelio/controller/c_nearby.dart';
 import 'package:course_hotelio/model/hotel.dart';
 import 'package:flutter/material.dart';
@@ -37,22 +38,25 @@ class NearbyPage extends StatelessWidget {
 
   GetBuilder<CNearby> hotels() {
     return GetBuilder<CNearby>(
-        builder: (_) {
-          List<Hotel> list = _.category == 'All Place'
-              ? _.listHotel
-              : _.listHotel
-                  .where((e) =>
-                      e.category.toLowerCase() ==
-                      cNearby.category.toLowerCase())
-                  .toList();
-          if (list.isEmpty) return const Center(child: Text('Empty'));
-          return ListView.builder(
-            itemCount: list.length,
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemBuilder: (BuildContext context, int index) {
-              Hotel hotel = list[index];
-              return Container(
+      builder: (_) {
+        List<Hotel> list = _.category == 'All Place'
+            ? _.listHotel
+            : _.listHotel
+                .where((e) =>
+                    e.category.toLowerCase() == cNearby.category.toLowerCase())
+                .toList();
+        if (list.isEmpty) return const Center(child: Text('Empty'));
+        return ListView.builder(
+          itemCount: list.length,
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemBuilder: (BuildContext context, int index) {
+            Hotel hotel = list[index];
+            return GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, AppRoute.detail, arguments: hotel);
+              },
+              child: Container(
                 margin: EdgeInsets.fromLTRB(
                   16,
                   index == 0 ? 0 : 8,
@@ -150,11 +154,12 @@ class NearbyPage extends StatelessWidget {
                     )
                   ],
                 ),
-              );
-            },
-          );
-        },
-      );
+              ),
+            );
+          },
+        );
+      },
+    );
   }
 
   GetBuilder<CNearby> categories() {
