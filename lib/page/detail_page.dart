@@ -57,47 +57,10 @@ class DetailPage extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border(
-            top: BorderSide(
-              color: Colors.grey[100]!,
-              width: 1.5,
-            ),
-          ),
-        ),
-        height: 80,
-        padding: const EdgeInsets.fromLTRB(16, 12, 16, 8),
-        child: Row(
-          children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    AppFormat.currency(hotel.price.toDouble()),
-                    style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                          color: AppColor.secondary,
-                          fontWeight: FontWeight.w900,
-                        ),
-                  ),
-                  const Text(
-                    'per night',
-                    style: TextStyle(
-                      color: Colors.grey,
-                    ),
-                  )
-                ],
-              ),
-            ),
-            ButtonCustom(
-              label: 'Booking Now',
-              onTap: () {},
-            ),
-          ],
-        ),
-      ),
+      bottomNavigationBar: Obx(() {
+        if (bookedData.id == '') return bookingNow(hotel, context);
+        return viewReceipt();
+      }),
       body: Container(
         decoration: const BoxDecoration(
           color: Colors.white,
@@ -149,6 +112,97 @@ class DetailPage extends StatelessWidget {
             const SizedBox(height: 20),
           ],
         ),
+      ),
+    );
+  }
+
+  Container viewReceipt() {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border(
+          top: BorderSide(color: Colors.grey[100]!, width: 1.5),
+        ),
+      ),
+      height: 80,
+      padding: const EdgeInsets.fromLTRB(16, 12, 16, 8),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Text(
+            'You booked this.',
+            style: TextStyle(
+              color: Colors.grey,
+            ),
+          ),
+          Material(
+            color: AppColor.secondary,
+            borderRadius: BorderRadius.circular(20),
+            child: InkWell(
+              borderRadius: BorderRadius.circular(20),
+              onTap: () {},
+              child: const Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 36,
+                  vertical: 14,
+                ),
+                child: Text(
+                  'View Receipt',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Container bookingNow(Hotel hotel, BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border(
+          top: BorderSide(
+            color: Colors.grey[100]!,
+            width: 1.5,
+          ),
+        ),
+      ),
+      height: 80,
+      padding: const EdgeInsets.fromLTRB(16, 12, 16, 8),
+      child: Row(
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  AppFormat.currency(hotel.price.toDouble()),
+                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                        color: AppColor.secondary,
+                        fontWeight: FontWeight.w900,
+                      ),
+                ),
+                const Text(
+                  'per night',
+                  style: TextStyle(
+                    color: Colors.grey,
+                  ),
+                )
+              ],
+            ),
+          ),
+          ButtonCustom(
+            label: 'Booking Now',
+            onTap: () {},
+          ),
+        ],
       ),
     );
   }
