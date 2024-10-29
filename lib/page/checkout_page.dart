@@ -1,6 +1,9 @@
+import 'package:course_hotelio/config/app_asset.dart';
+import 'package:course_hotelio/config/app_color.dart';
 import 'package:course_hotelio/config/app_format.dart';
 import 'package:course_hotelio/controller/c_user.dart';
 import 'package:course_hotelio/model/hotel.dart';
+import 'package:course_hotelio/widget/button_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -34,6 +37,72 @@ class CheckoutPage extends StatelessWidget {
           const SizedBox(height: 16),
           roomDetails(context),
           const SizedBox(height: 16),
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(16),
+            ),
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Payment Method',
+                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
+                const SizedBox(height: 8),
+                paymentMethod(context),
+                const SizedBox(height: 20),
+                ButtonCustom(
+                  label: 'Process To Payment',
+                  isExpanded: true,
+                  onTap: () {},
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Container paymentMethod(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: Colors.grey[100]!)),
+      padding: const EdgeInsets.all(16),
+      child: Row(
+        children: [
+          Image.asset(
+            AppAsset.iconMasterCard,
+            width: 50,
+          ),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Hotelio',
+                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
+                Text(
+                  'Balance ${AppFormat.currency(5000000)}',
+                  style: const TextStyle(
+                    color: Colors.grey,
+                    fontWeight: FontWeight.w300,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const Icon(Icons.check_circle, color: AppColor.secondary),
         ],
       ),
     );
@@ -41,43 +110,41 @@ class CheckoutPage extends StatelessWidget {
 
   Container roomDetails(BuildContext context) {
     return Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+      ),
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Room Details',
+            style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
           ),
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Room Details',
-                style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
-              ),
-              const SizedBox(height: 16),
-              itemRoomDetails(context, 'date',
-                  AppFormat.date(DateTime.now().toIso8601String())),
-              const SizedBox(height: 16),
-              itemRoomDetails(context, 'Guest', '2 Guest'),
-              const SizedBox(height: 16),
-              itemRoomDetails(context, 'Breakfast', 'Included'),
-              const SizedBox(height: 16),
-              itemRoomDetails(context, 'Check-in Time', '14:00 WIB'),
-              const SizedBox(height: 16),
-              itemRoomDetails(
-                  context, '1 night', AppFormat.currency(1290000)),
-              const SizedBox(height: 16),
-              itemRoomDetails(context, 'Service fee', AppFormat.currency(50)),
-              const SizedBox(height: 16),
-              itemRoomDetails(context, 'Activities', AppFormat.currency(350)),
-              const SizedBox(height: 16),
-              itemRoomDetails(
-                  context, 'Total Payment', AppFormat.currency(13550)),
-              const SizedBox(height: 16),
-            ],
-          ),
-        );
+          const SizedBox(height: 16),
+          itemRoomDetails(context, 'date',
+              AppFormat.date(DateTime.now().toIso8601String())),
+          const SizedBox(height: 16),
+          itemRoomDetails(context, 'Guest', '2 Guest'),
+          const SizedBox(height: 16),
+          itemRoomDetails(context, 'Breakfast', 'Included'),
+          const SizedBox(height: 16),
+          itemRoomDetails(context, 'Check-in Time', '14:00 WIB'),
+          const SizedBox(height: 16),
+          itemRoomDetails(context, '1 night', AppFormat.currency(1290000)),
+          const SizedBox(height: 16),
+          itemRoomDetails(context, 'Service fee', AppFormat.currency(50)),
+          const SizedBox(height: 16),
+          itemRoomDetails(context, 'Activities', AppFormat.currency(350)),
+          const SizedBox(height: 16),
+          itemRoomDetails(context, 'Total Payment', AppFormat.currency(13550)),
+          const SizedBox(height: 16),
+        ],
+      ),
+    );
   }
 
   Row itemRoomDetails(BuildContext context, String title, String data) {
