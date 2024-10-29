@@ -2,6 +2,7 @@ import 'package:course_hotelio/config/app_color.dart';
 import 'package:course_hotelio/config/app_route.dart';
 import 'package:course_hotelio/config/session.dart';
 import 'package:course_hotelio/firebase_options.dart';
+import 'package:course_hotelio/page/checkout_page.dart';
 import 'package:course_hotelio/page/detail_page.dart';
 import 'package:course_hotelio/page/home_page.dart';
 import 'package:course_hotelio/page/intro_page.dart';
@@ -51,7 +52,7 @@ class MyApp extends StatelessWidget {
         AppRoute.home: (context) => HomePage(),
         AppRoute.signin: (context) => SignInPage(),
         AppRoute.detail: (context) => DetailPage(),
-        AppRoute.checkout: (context) => const IntroPage(),
+        AppRoute.checkout: (context) =>  CheckoutPage(),
         AppRoute.checkoutSuccess: (context) => const IntroPage(),
         AppRoute.detailBooking: (context) => const IntroPage(),
       },

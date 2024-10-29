@@ -16,8 +16,8 @@ class AppFormat {
   static String currency(double number) {
     return NumberFormat.currency(
       decimalDigits: 0,
-      locale: 'en_US',
-      symbol: '\$',
+      locale: 'id_ID',
+      symbol: 'Rp ',
     ).format(number);
   }
 }
