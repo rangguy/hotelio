@@ -69,3 +69,21 @@ class Booking {
         "is_done": isDone,
       };
 }
+
+Booking get initBooking => Booking(
+      id: '',
+      idHotel: '',
+      cover: '',
+      name: '',
+      location: '',
+      date: '',
+      guest: 0,
+      breakfast: '',
+      checkInTime: '',
+      night: 0,
+      serviceFee: 0,
+      activities: 0,
+      totalPayment: 0,
+      status: '',
+      isDone: false,
+    );
