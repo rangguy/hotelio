@@ -1,6 +1,7 @@
 import 'package:course_hotelio/config/app_asset.dart';
 import 'package:course_hotelio/config/app_color.dart';
 import 'package:course_hotelio/config/app_format.dart';
+import 'package:course_hotelio/config/app_route.dart';
 import 'package:course_hotelio/controller/c_user.dart';
 import 'package:course_hotelio/model/booking.dart';
 import 'package:course_hotelio/model/hotel.dart';
@@ -82,7 +83,8 @@ class CheckoutPage extends StatelessWidget {
                         isDone: false,
                       ),
                     );
-                    
+                    Navigator.pushNamed(context, AppRoute.checkoutSuccess,
+                        arguments: hotel);
                   },
                 ),
               ],
