@@ -2,10 +2,13 @@ import 'package:course_hotelio/config/app_asset.dart';
 import 'package:course_hotelio/config/app_color.dart';
 import 'package:course_hotelio/config/app_format.dart';
 import 'package:course_hotelio/controller/c_user.dart';
+import 'package:course_hotelio/model/booking.dart';
 import 'package:course_hotelio/model/hotel.dart';
+import 'package:course_hotelio/source/booking_source.dart';
 import 'package:course_hotelio/widget/button_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class CheckoutPage extends StatelessWidget {
   CheckoutPage({super.key});
@@ -58,7 +61,29 @@ class CheckoutPage extends StatelessWidget {
                 ButtonCustom(
                   label: 'Process To Payment',
                   isExpanded: true,
-                  onTap: () {},
+                  onTap: () {
+                    BookingSource.addBooking(
+                      cUser.data.id!,
+                      Booking(
+                        id: '',
+                        idHotel: hotel.id,
+                        cover: hotel.cover,
+                        name: hotel.name,
+                        location: hotel.location,
+                        date: DateFormat('yyyy-MM-dd').format(DateTime.now()),
+                        guest: 1,
+                        breakfast: 'Included',
+                        checkInTime: '12:00 WIB',
+                        night: 2,
+                        serviceFee: 60000,
+                        activities: 42000,
+                        totalPayment: hotel.price + 2 + 60000 + 42000,
+                        status: "PAID",
+                        isDone: false,
+                      ),
+                    );
+                    
+                  },
                 ),
               ],
             ),
