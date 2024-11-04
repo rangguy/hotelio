@@ -3,6 +3,7 @@ import 'package:course_hotelio/config/app_color.dart';
 import 'package:course_hotelio/controller/c_home.dart';
 import 'package:course_hotelio/page/history_page.dart';
 import 'package:course_hotelio/page/nearby_page.dart';
+import 'package:course_hotelio/widget/coming_soon.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -20,10 +21,13 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Obx(() {
+        if (cHome.indexPage == 0) {
+          return NearbyPage();
+        }
         if (cHome.indexPage == 1) {
           return const HistoryPage();
         }
-        return NearbyPage();
+        return const ComingSoon();
       }),
       bottomNavigationBar: Obx(() {
         return Material(
