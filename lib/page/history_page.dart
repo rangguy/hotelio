@@ -91,23 +91,25 @@ class _HistoryPageState extends State<HistoryPage> {
             ),
           ),
           const SizedBox(width: 16),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                booking.name,
-                style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
-              ),
-              Text(
-                AppFormat.date(booking.date),
-                style: const TextStyle(
-                  color: Colors.grey,
-                  fontWeight: FontWeight.w300,
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  booking.name,
+                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
                 ),
-              ),
-            ],
+                Text(
+                  AppFormat.date(booking.date),
+                  style: const TextStyle(
+                    color: Colors.grey,
+                    fontWeight: FontWeight.w300,
+                  ),
+                ),
+              ],
+            ),
           ),
           const SizedBox(width: 16),
           Container(
@@ -156,15 +158,19 @@ class _HistoryPageState extends State<HistoryPage> {
                       fontWeight: FontWeight.w900,
                     ),
               ),
-              const Text(
-                '100 transactions',
-                style: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 12,
-                ),
+              Obx( 
+                () {
+                  return Text(
+                    '${cHistory.listBooking.length} transactions',
+                    style: const TextStyle(
+                      color: Colors.grey,
+                      fontSize: 12,
+                    ),
+                  );
+                }
               ),
             ],
-          )
+          ),
         ],
       ),
     );
