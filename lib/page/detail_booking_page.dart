@@ -130,7 +130,7 @@ Container roomDetails(Booking booking, BuildContext context) {
         itemRoomDetails(context, 'Check-in Time', booking.checkInTime),
         const SizedBox(height: 16),
         itemRoomDetails(
-            context, '${booking.night} night', AppFormat.currency(1290000)),
+            context, '${booking.night} night', AppFormat.currency(1000000)),
         const SizedBox(height: 16),
         itemRoomDetails(
           context,
