@@ -1,6 +1,7 @@
 import 'package:course_hotelio/config/app_asset.dart';
 import 'package:course_hotelio/config/app_color.dart';
 import 'package:course_hotelio/controller/c_home.dart';
+import 'package:course_hotelio/page/history_page.dart';
 import 'package:course_hotelio/page/nearby_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,7 +21,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       body: Obx(() {
         if (cHome.indexPage == 1) {
-          return const Center(child: Text('Halaman History'));
+          return const HistoryPage();
         }
         return NearbyPage();
       }),
