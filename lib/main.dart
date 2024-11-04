@@ -4,6 +4,7 @@ import 'package:course_hotelio/config/session.dart';
 import 'package:course_hotelio/firebase_options.dart';
 import 'package:course_hotelio/page/checkout_page.dart';
 import 'package:course_hotelio/page/checkout_success_page.dart';
+import 'package:course_hotelio/page/detail_booking_page.dart';
 import 'package:course_hotelio/page/detail_page.dart';
 import 'package:course_hotelio/page/home_page.dart';
 import 'package:course_hotelio/page/intro_page.dart';
@@ -55,7 +56,7 @@ class MyApp extends StatelessWidget {
         AppRoute.detail: (context) => DetailPage(),
         AppRoute.checkout: (context) =>  CheckoutPage(),
         AppRoute.checkoutSuccess: (context) => const CheckoutSuccessPage(),
-        AppRoute.detailBooking: (context) => const IntroPage(),
+        AppRoute.detailBooking: (context) => DetailBookingPage(),
       },
     );
   }

@@ -41,54 +41,38 @@ class CheckoutPage extends StatelessWidget {
           const SizedBox(height: 16),
           roomDetails(context),
           const SizedBox(height: 16),
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(16),
-            ),
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Payment Method',
-                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
+          paymentMethod(context),
+          const SizedBox(height: 20),
+          ButtonCustom(
+            label: 'Procced to Payment',
+            isExpanded: true,
+            onTap: () {
+              BookingSource.addBooking(
+                cUser.data.id!,
+                Booking(
+                  id: '',
+                  idHotel: hotel.id,
+                  cover: hotel.cover,
+                  name: hotel.name,
+                  location: hotel.location,
+                  date: DateFormat('yyyy-MM-dd').format(DateTime.now()),
+                  guest: 1,
+                  breakfast: 'Included',
+                  checkInTime: '08.00 WIB',
+                  night: 2,
+                  serviceFee: 6,
+                  activities: 40,
+                  totalPayment: hotel.price + 2 + 6 + 40,
+                  status: 'PAID',
+                  isDone: false,
                 ),
-                const SizedBox(height: 8),
-                paymentMethod(context),
-                const SizedBox(height: 20),
-                ButtonCustom(
-                  label: 'Process To Payment',
-                  isExpanded: true,
-                  onTap: () {
-                    BookingSource.addBooking(
-                      cUser.data.id!,
-                      Booking(
-                        id: '',
-                        idHotel: hotel.id,
-                        cover: hotel.cover,
-                        name: hotel.name,
-                        location: hotel.location,
-                        date: DateFormat('yyyy-MM-dd').format(DateTime.now()),
-                        guest: 1,
-                        breakfast: 'Included',
-                        checkInTime: '12:00 WIB',
-                        night: 2,
-                        serviceFee: 60000,
-                        activities: 42000,
-                        totalPayment: hotel.price + 2 + 60000 + 42000,
-                        status: "PAID",
-                        isDone: false,
-                      ),
-                    );
-                    Navigator.pushNamed(context, AppRoute.checkoutSuccess,
-                        arguments: hotel);
-                  },
-                ),
-              ],
-            ),
+              );
+              Navigator.pushNamed(
+                context,
+                AppRoute.checkoutSuccess,
+                arguments: hotel,
+              );
+            },
           ),
         ],
       ),
@@ -98,38 +82,58 @@ class CheckoutPage extends StatelessWidget {
   Container paymentMethod(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: Colors.grey[100]!)),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+      ),
       padding: const EdgeInsets.all(16),
-      child: Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image.asset(
-            AppAsset.iconMasterCard,
-            width: 50,
-          ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Hotelio',
-                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
+          Text(
+            'Payment Method',
+            style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                  fontWeight: FontWeight.bold,
                 ),
-                Text(
-                  'Balance ${AppFormat.currency(5000000)}',
-                  style: const TextStyle(
-                    color: Colors.grey,
-                    fontWeight: FontWeight.w300,
+          ),
+          const SizedBox(height: 8),
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: Colors.grey[300]!),
+            ),
+            padding: const EdgeInsets.all(16),
+            child: Row(
+              children: [
+                Image.asset(
+                  AppAsset.iconMasterCard,
+                  width: 50,
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Elliot York Owell',
+                        style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
+                      ),
+                      Text(
+                        'Balance ${AppFormat.currency(80000)}',
+                        style: const TextStyle(
+                          color: Colors.grey,
+                          fontWeight: FontWeight.w300,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
+                const Icon(Icons.check_circle, color: AppColor.secondary),
               ],
             ),
           ),
-          const Icon(Icons.check_circle, color: AppColor.secondary),
         ],
       ),
     );

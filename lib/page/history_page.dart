@@ -1,6 +1,7 @@
 import 'package:course_hotelio/config/app_asset.dart';
 import 'package:course_hotelio/config/app_color.dart';
 import 'package:course_hotelio/config/app_format.dart';
+import 'package:course_hotelio/config/app_route.dart';
 import 'package:course_hotelio/controller/c_history.dart';
 import 'package:course_hotelio/controller/c_user.dart';
 import 'package:course_hotelio/model/booking.dart';
@@ -59,7 +60,13 @@ class _HistoryPageState extends State<HistoryPage> {
               return Padding(
                 padding: const EdgeInsets.only(bottom: 16),
                 child: GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(
+                      context,
+                      AppRoute.detailBooking,
+                      arguments: element,
+                    );
+                  },
                   child: item(context, element),
                 ),
               );
@@ -158,17 +165,15 @@ class _HistoryPageState extends State<HistoryPage> {
                       fontWeight: FontWeight.w900,
                     ),
               ),
-              Obx( 
-                () {
-                  return Text(
-                    '${cHistory.listBooking.length} transactions',
-                    style: const TextStyle(
-                      color: Colors.grey,
-                      fontSize: 12,
-                    ),
-                  );
-                }
-              ),
+              Obx(() {
+                return Text(
+                  '${cHistory.listBooking.length} transactions',
+                  style: const TextStyle(
+                    color: Colors.grey,
+                    fontSize: 12,
+                  ),
+                );
+              }),
             ],
           ),
         ],
